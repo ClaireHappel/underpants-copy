@@ -54,11 +54,24 @@ _.identity = function(value){
 * _.typeOf("javascript") -> "string"
 * _.typeOf([1,2,3]) -> "array"
 */
-
+// I: one inuput, a value of any type
+// O: one output, a string that describes the value
+// C: none
+// E: none
 _.typeOf = function(value){
-
+  // if value is strictly equal to null
+  if (value === null) {
+    // return 'null'
+    return "null";
+  }
+ // if value is an array
+ if (Array.isArray(value)) {
+    // return 'array'
+    return "array";
+  }
+  // else return 
+  return typeof value;
 }
-
 
 /** _.first
 * Arguments:
@@ -78,13 +91,16 @@ _.typeOf = function(value){
 *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
 
-_.first = function(array, number){
-    // slice method
+// I:
+// O:
+// C:
+// E:
+_.first = function (array, num){
+    // if array is not an array
+    if (!Array.isArray(Array)){
+        return [];
+    }
 }
-
-_.first(['a', 'b', 'c'], 2); // ['a', b']
-
-
 /** _.last
 * Arguments:
 *   1) An array
@@ -155,27 +171,6 @@ _.first(['a', 'b', 'c'], 2); // ['a', b']
 *      -> should log "a" "b" "c" to the console
 */
 
-_.each = function(collection, func){
-    // determine if collection is an array
-    if (Array.isArray(collection)){
-        // loop over collection
-        for (let i = 0; i < collection.length; i++){
-            // call <function> on each element passing in element, index, and collection as an argument
-            func(collection[i], i, collection);
-        }
-    } else { // else it's an object
-        // iterate over the object
-            // invoke func on each property 
-    }
-};
-
-// _.each(['a', 'b'], function(item){
-//     console.log(item);
-// });
-
-// _.each({ a: 1, b: 2 }, function(value){
-//     console.log(value);
-// })
 
 
 
@@ -213,37 +208,6 @@ _.each = function(collection, func){
 * Extra Credit:
 *   use _.each in your implementation
 */
-
-_.filter = function(array, func){
-    const output = [];
-
-    for (let i = 0; i < array.length; i++){
-        // determine if the result of invoking the callback is true
-        if(func(array[i], i, array) === true){
-            output.push(array[i]);
-        } 
-    }
-    return output;
-}
-
-// purpose of the callback
-    // tests each item in the array
-
-//              array                  function
-
-_.filter(['alex', 'francis', 'aaron'], function(string){ return string[0] === 'a'})
-// ['alex', 'aaron']
-
-// ['alex', 'francis', 'aaron'] => function(string){ return string[0] === 'a'}
-//     ^                                     'alex'           true
-//          ['alex']
-// ['alex', 'francis', 'aaron'] => function(string){ return string[0] === 'a'}
-//             ^                            'francis'           false
-// // ['alex', 'francis', 'aaron'] => function(string){ return string[0] === 'a'}
-//                           ^                  'aaron'          true
-//        ['alex', 'aaron']
-
-
 
 
 /** _.reject
@@ -299,50 +263,6 @@ _.filter(['alex', 'francis', 'aaron'], function(string){ return string[0] === 'a
 
 
 
-// _.map = function(collection, func){
-//     const output = [];
-
-//     if (Array.isArray(collection)){ // collection is an array
-//         for (let i = 0; i < collection.length; i++){
-//             // call function on each element passing in element, index, collection
-//             const result = func(collection[i], i, collection);
-//             // save the result of invoking function to an output array
-//             output.push(result);
-//         }
-//     } else { // assume it's an object
-//         for (let key in collection){
-            
-//         }
-//     }
-
-
-//     return output;
-// }
-
-/*
-[]
-if (collection is an an array)
-    // for loop
-        // i = 0
-            // const result = 2
-            // [].push(2) => [2]
-        // i = 1
-            // const result = 4
-            // [2].push(4) => [2, 4]
-        // i = 2
-            // const reuslt = 6
-            // [2, 4].push(6) => [2, 4, 6]
-        // i = 3
-            // const reuslt = 8
-            // [2, 4, 6].push(8) => [2, 4, 6, 8]
-
-*/
-
-
-
-
-
-
 
 // _.map([1,2,3,4], function(e){return e * 2} ); // [2, 4, 6, 8]
 // //       ^
@@ -390,36 +310,6 @@ if (collection is an an array)
 */
 
 
-_.every = function(collection, func){
-    // if array
-    if (Array.isArray(collection)){
-        // determine if func was not provided
-        if (func === undefined){
-            for (let i = 0; i < collection.length; i++){
-                // determine if current item is NOT truthy
-                if (!collection[i]){
-                    return false;
-                }
-            }
-        } else { // else it was
-            for (let i = 0; i < collection.length; i++){
-                // determine if result of invoking callback is falsey
-                if (func(collection[i], i, collection) === ){
-                    return false;
-                }
-            }
-        }
-    } else { // else it's an object
-        if (func === undefined){
-
-        } else { // else it was
-
-        }
-    }
-
-    return true;
-}
-
 
 _.every(['a', 'bb'], function(str){ return str.length === 1});
 //              ^              a              true
@@ -445,9 +335,6 @@ _.every({ a: 1, b: 2});
 
 _.every({ a: 1, b: null});
 // false because one value is falsey
-
-
-
 
 
 /** _.some
